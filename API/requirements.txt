@@ -1,0 +1,5 @@
+fastapi[standard]
+langchain
+langchain-google-genai
+ultralytics
+python-dotenv

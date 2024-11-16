@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 8
+names: ['Black rot of tea', 'Brown blight of tea', 'Leaf rust of tea', 'Red Spider infested tea leaf', 'Tea Mosquito bug infested leaf', 'Tea leaf', 'White spot of tea', 'disease']
+
+roboflow:
+  workspace: py-developer
+  project: tea-y013v
+  version: 4
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/py-developer/tea-y013v/dataset/4
