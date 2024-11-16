@@ -15,7 +15,7 @@ class DiseaseApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: const DiseaseHomePage(),
+      home: HomeScreen(),
     );
   }
 }
