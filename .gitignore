@@ -3,3 +3,6 @@
 /API/.env
 /API/__pycache__
 /API/static
+/demo/.env
+/demo/__pycache__
+/demo/static
