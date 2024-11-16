@@ -19,10 +19,21 @@ class _CameraScreenState extends State<CameraScreen> {
     _initializeCamera();
   }
 
-  void _initializeCamera() async {
+  // Initialize the camera asynchronously
+  Future<void> _initializeCamera() async {
     final cameras = await availableCameras();
+    // Ensure that cameras are available before using them
+    if (cameras.isEmpty) {
+      // Handle no cameras available
+      print('No cameras available');
+      return;
+    }
     _controller = CameraController(cameras[0], ResolutionPreset.medium);
+
+    // Initialize the controller
     _initializeControllerFuture = _controller.initialize();
+
+    // Set the state after initialization is complete
     setState(() {});
   }
 
@@ -34,12 +45,12 @@ class _CameraScreenState extends State<CameraScreen> {
 
   Future<void> _takePicture() async {
     try {
-      await _initializeControllerFuture;
+      await _initializeControllerFuture; // Ensure controller is initialized
       final image = await _controller.takePicture();
-      widget.onPhotoCaptured(image.path);
-      Navigator.pop(context);
+      widget.onPhotoCaptured(image.path); // Pass the image path to the callback
+      Navigator.pop(context); // Go back to previous screen
     } catch (e) {
-      print(e);
+      print(e); // Print any errors
     }
   }
 
@@ -51,15 +62,21 @@ class _CameraScreenState extends State<CameraScreen> {
         future: _initializeControllerFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            return CameraPreview(_controller);
+            return CameraPreview(
+                _controller); // Show camera preview once initialized
           } else {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+                child:
+                    CircularProgressIndicator()); // Show loading spinner while initializing
           }
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _takePicture,
-        child: const Icon(Icons.camera),
+      floatingActionButton: Align(
+        alignment: Alignment.bottomCenter,
+        child: FloatingActionButton(
+          onPressed: _takePicture,
+          child: const Icon(Icons.camera),
+        ),
       ),
     );
   }

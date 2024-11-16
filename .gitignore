@@ -2,3 +2,4 @@
 /.env
 /API/.env
 /API/__pycache__
+/API/static

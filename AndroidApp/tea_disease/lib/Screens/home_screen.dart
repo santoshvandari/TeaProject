@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:tea_disease/Screens/result_screen.dart';
 import 'package:tea_disease/Services/api.dart';
@@ -9,17 +11,53 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String? result;
+  bool _isLoading = false;
 
+  // Method to handle photo capture and API response
   void _onPhotoCaptured(String imagePath) async {
-    final response = await ApiService.uploadImage(imagePath);
     setState(() {
-      if (response['success']) {
-        result = response['data'];
-      } else {
-        result = response['error'];
-      }
+      _isLoading = true;
     });
+
+    try {
+      final response = await ApiService.uploadImage(imagePath);
+      debugPrint(response['success'].toString());
+
+      debugPrint(response['data']);
+
+      if (response['success']) {
+        if (response['predictions'] != null) {
+          // Navigate to result screen with the API response data
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  ResultScreen(result: response['predictions'].toString()),
+            ),
+          );
+        }
+      } else {
+        // Show an error message if the response is unsuccessful
+        _showErrorSnackbar(response['error'] ?? "An error occurred.");
+      }
+    } catch (error) {
+      // Handle unexpected errors (e.g., network issues)
+      _showErrorSnackbar("An unexpected error occurred: $error");
+    } finally {
+      // Hide the loading indicator after processing is done
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
+  // Method to show a snackbar with an error message
+  void _showErrorSnackbar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+      ),
+    );
   }
 
   @override
@@ -27,24 +65,26 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(title: const Text("Tea Leaf Analysis")),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        CameraScreen(onPhotoCaptured: _onPhotoCaptured),
+        child: _isLoading
+            ? const CircularProgressIndicator()
+            : Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      // Navigate to the CameraScreen for capturing an image
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              CameraScreen(onPhotoCaptured: _onPhotoCaptured),
+                        ),
+                      );
+                    },
+                    child: const Text("Capture Tea Leaf"),
                   ),
-                );
-              },
-              child: const Text("Capture Tea Leaf"),
-            ),
-            if (result != null) ...[ResultScreen(result: result!)],
-          ],
-        ),
+                ],
+              ),
       ),
     );
   }

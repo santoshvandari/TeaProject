@@ -78,13 +78,13 @@ async def predict_disease(file: UploadFile = File(...)):
             class_id = int(pred[5])
             confidence = pred[4]
             disease = class_names[class_id]
-            summary = generate_summary(disease)
+            # summary = generate_summary(disease)
+            summary = f"Summary for {disease} is not available"
             formatted_predictions.append({
                 'class': disease,
                 'summary': summary,
                 'confidence': confidence
             })
-
         # If no predictions
         if len(formatted_predictions) == 0:
             return JSONResponse(status_code=200, content={ "message": "No disease detected"})
