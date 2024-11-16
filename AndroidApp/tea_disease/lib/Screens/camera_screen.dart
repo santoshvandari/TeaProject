@@ -58,25 +58,30 @@ class _CameraScreenState extends State<CameraScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Capture Tea Leaf")),
-      body: FutureBuilder(
-        future: _initializeControllerFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            return CameraPreview(
-                _controller); // Show camera preview once initialized
-          } else {
-            return const Center(
-                child:
-                    CircularProgressIndicator()); // Show loading spinner while initializing
-          }
-        },
-      ),
-      floatingActionButton: Align(
-        alignment: Alignment.bottomCenter,
-        child: FloatingActionButton(
-          onPressed: _takePicture,
-          child: const Icon(Icons.camera),
-        ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 8.0),
+        child: Stack(children: [
+          FutureBuilder(
+            future: _initializeControllerFuture,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                return CameraPreview(
+                    _controller); // Show camera preview once initialized
+              } else {
+                return const Center(
+                    child:
+                        CircularProgressIndicator()); // Show loading spinner while initializing
+              }
+            },
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: FloatingActionButton(
+              onPressed: _takePicture,
+              child: const Icon(Icons.camera),
+            ),
+          ),
+        ]),
       ),
     );
   }

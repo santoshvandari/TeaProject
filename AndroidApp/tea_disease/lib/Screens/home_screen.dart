@@ -12,6 +12,7 @@ class _HomeScreenState extends State<HomeScreen> {
   bool _isLoading = false;
 
   // Method to handle photo capture and API response
+  // Method to handle photo capture and API response
   void _onPhotoCaptured(String imagePath) async {
     setState(() {
       _isLoading = true;
@@ -21,13 +22,12 @@ class _HomeScreenState extends State<HomeScreen> {
       final response = await ApiService.uploadImage(imagePath);
       if (response['success']) {
         if (response['predictions'] != null) {
-          debugPrint("Predictions: ${response['predictions']}");
-          // Navigate to result screen with the API response data
+          // Navigate to result screen with the API response data (pass the actual data, not stringified JSON)
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) =>
-                  ResultScreen(result: response['predictions'][0].toString()),
+                  ResultScreen(result: response['predictions']),
             ),
           );
         }

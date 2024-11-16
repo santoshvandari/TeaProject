@@ -78,8 +78,7 @@ async def predict_disease(file: UploadFile = File(...)):
             class_id = int(pred[5])
             confidence = pred[4]
             disease = class_names[class_id]
-            # summary = generate_summary(disease)
-            summary = f"Summary for {disease} is not available"
+            summary = generate_summary(disease)
             formatted_predictions.append({
                 'class': disease,
                 'summary': summary,
