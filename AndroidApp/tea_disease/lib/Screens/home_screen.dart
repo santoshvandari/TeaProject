@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:tea_disease/Screens/result_screen.dart';
 import 'package:tea_disease/Services/api.dart';
@@ -21,18 +19,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
     try {
       final response = await ApiService.uploadImage(imagePath);
-      debugPrint(response['success'].toString());
-
-      debugPrint(response['data']);
-
       if (response['success']) {
         if (response['predictions'] != null) {
+          debugPrint("Predictions: ${response['predictions']}");
           // Navigate to result screen with the API response data
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) =>
-                  ResultScreen(result: response['predictions'].toString()),
+                  ResultScreen(result: response['predictions'][0].toString()),
             ),
           );
         }

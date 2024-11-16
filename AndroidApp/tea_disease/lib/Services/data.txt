@@ -1,0 +1,48 @@
+D/CameraStateRegistry( 6954): -------------------------------------------------------------------
+D/CameraStateRegistry( 6954): Camera@7c6f0ae[id=1]                         UNKNOWN               
+D/CameraStateRegistry( 6954): Camera@37a57e0[id=3]                         UNKNOWN               
+D/CameraStateRegistry( 6954): Camera@54e78f1[id=0]                         CLOSED                
+D/CameraStateRegistry( 6954): Camera@39e8061[id=2]                         UNKNOWN               
+D/CameraStateRegistry( 6954): -------------------------------------------------------------------
+D/CameraStateRegistry( 6954): Open count: 0 (Max allowed: 1)
+D/CameraStateMachine( 6954): New public camera state CameraState{type=CLOSED, error=null} from CLOSED and null
+D/CameraStateMachine( 6954): Publishing new public camera state CameraState{type=CLOSED, error=null}
+Another exception was thrown: FormatException: Unexpected character (at
+character 2)
+W/WindowOnBackDispatcher( 6954): OnBackInvokedCallback is not enabled for the application.
+W/WindowOnBackDispatcher( 6954): Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+I/ViewRootImpl@40253d8[MainActivity]( 6954): handleAppVisibility mAppVisible = true visible = false
+I/ViewRootImpl@40253d8[MainActivity]( 6954): handleWindowFocusChanged: 0 0 call from android.view.ViewRootImpl.-$$Nest$mhandleWindowFocusChanged:0
+I/ImeFocusController( 6954): onPreWindowFocus: skipped, hasWindowFocus=false mHasImeFocus=true
+I/ImeFocusController( 6954): onPostWindowFocus: skipped, hasWindowFocus=false mHasImeFocus=true
+I/SurfaceView@1b7df9a( 6954): onWindowVisibilityChanged(8) false io.flutter.embedding.android.FlutterSurfaceView{1b7df9a V.E...... ........ 0,0-1080,2273} of ViewRootImpl@40253d8[MainActivity]
+I/SurfaceView( 6954): 28827546 Changes: creating=false format=false size=false visible=true alpha=false hint=false visible=true left=false top=false z=false attached=true lifecycleStrategy=false
+I/SurfaceView@1b7df9a( 6954): 28827546 Cur surface: Surface(name=null)/@0x23165e4
+I/SurfaceView( 6954): 28827546 surfaceDestroyed
+I/SurfaceView@1b7df9a( 6954): surfaceDestroyed callback.size 1 #2 io.flutter.embedding.android.FlutterSurfaceView{1b7df9a V.E...... ........ 0,0-1080,2273}
+I/SurfaceView@1b7df9a( 6954): updateSurface: mVisible = false mSurface.isValid() = true
+I/SurfaceView@1b7df9a( 6954): releaseSurfaces: viewRoot = ViewRootImpl@40253d8[MainActivity]
+V/SurfaceView@1b7df9a( 6954): Layout: x=0 y=0 w=1080 h=2273, frame=Rect(0, 0 - 1080, 2273)
+I/ViewRootImpl@40253d8[MainActivity]( 6954): destroyHardwareResources: Callers=android.view.ViewRootImpl.performTraversals:3934 android.view.ViewRootImpl.doTraversal:3288 android.view.ViewRootImpl$TraversalRunnable.run:11346 android.view.Choreographer$CallbackRecord.run:1689 android.view.Choreographer$CallbackRecord.run:1698 android.view.Choreographer.doCallbacks:1153 android.view.Choreographer.doFrame:1079 android.view.Choreographer$FrameDisplayEventReceiver.run:1646 android.os.Handler.handleCallback:958 android.os.Handler.dispatchMessage:99 
+D/SurfaceView( 6954): 125678865 windowPositionLost, frameNr = 0
+D/OpenGLRenderer( 6954): CacheManager::trimMemory(20)
+I/ViewRootImpl@40253d8[MainActivity]( 6954): Relayout returned: old=(0,0,1080,2408) new=(0,0,1080,2408) relayoutAsync=false req=(1080,2408)8 dur=26 res=0x402 s={false 0x0} ch=true seqId=0
+I/SurfaceView@1b7df9a( 6954): windowStopped(true) false io.flutter.embedding.android.FlutterSurfaceView{1b7df9a V.E...... ........ 0,0-1080,2273} of ViewRootImpl@40253d8[MainActivity]
+D/SurfaceView@1b7df9a( 6954): updateSurface: surface is not valid
+I/SurfaceView@1b7df9a( 6954): releaseSurfaces: viewRoot = ViewRootImpl@40253d8[MainActivity]
+D/SurfaceView@1b7df9a( 6954): updateSurface: surface is not valid
+I/SurfaceView@1b7df9a( 6954): releaseSurfaces: viewRoot = ViewRootImpl@40253d8[MainActivity]
+D/OpenGLRenderer( 6954): CacheManager::trimMemory(20)
+I/ViewRootImpl@40253d8[MainActivity]( 6954): stopped(true) old = false
+D/ViewRootImpl@40253d8[MainActivity]( 6954): WindowStopped on com.example.tea_disease/com.example.tea_disease.MainActivity set to true
+D/OpenGLRenderer( 6954): CacheManager::trimMemory(20)
+D/SurfaceView@1b7df9a( 6954): updateSurface: surface is not valid
+I/SurfaceView@1b7df9a( 6954): releaseSurfaces: viewRoot = ViewRootImpl@40253d8[MainActivity]
+D/SurfaceView@1b7df9a( 6954): updateSurface: surface is not valid
+I/SurfaceView@1b7df9a( 6954): releaseSurfaces: viewRoot = ViewRootImpl@40253d8[MainActivity]
+I/ViewRootImpl@40253d8[MainActivity]( 6954): onDisplayChanged oldDisplayState=2 newDisplayState=1
+I/ViewRootImpl@40253d8[MainActivity]( 6954): onDisplayChanged oldDisplayState=1 newDisplayState=1
+D/InputTransport( 6954): Input channel destroyed: 'ClientS', fd=154
+Lost connection to device.
+wabisabi@wabisabi:~/Desktop/Tea/AndroidApp/tea_disease$ 
+
