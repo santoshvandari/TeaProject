@@ -12,7 +12,6 @@ class _HomeScreenState extends State<HomeScreen> {
   bool _isLoading = false;
 
   // Method to handle photo capture and API response
-  // Method to handle photo capture and API response
   void _onPhotoCaptured(String imagePath) async {
     setState(() {
       _isLoading = true;
@@ -20,20 +19,19 @@ class _HomeScreenState extends State<HomeScreen> {
 
     try {
       final response = await ApiService.uploadImage(imagePath);
-      if (response['success']) {
-        if (response['predictions'] != null) {
-          // Navigate to result screen with the API response data (pass the actual data, not stringified JSON)
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) =>
-                  ResultScreen(result: response['predictions']),
+      if (response['predictions'] != null) {
+        // Handle the predictions and pass the data to ResultScreen
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ResultScreen(
+              result: response['predictions'], // Pass the prediction data
             ),
-          );
-        }
+          ),
+        );
       } else {
-        // Show an error message if the response is unsuccessful
-        _showErrorSnackbar(response['error'] ?? "An error occurred.");
+        // Show an error message if the response does not contain predictions
+        _showErrorSnackbar("No predictions received.");
       }
     } catch (error) {
       // Handle unexpected errors (e.g., network issues)
@@ -71,8 +69,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>
-                              CameraScreen(onPhotoCaptured: _onPhotoCaptured),
+                          builder: (context) => CameraScreen(
+                            onPhotoCaptured: _onPhotoCaptured,
+                          ),
                         ),
                       );
                     },
