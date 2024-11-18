@@ -19,7 +19,6 @@ apikey = os.getenv("API_KEY")
 app = FastAPI()
 
 # Mount the static directory so FastAPI can serve static files
-app.mount("/static", StaticFiles(directory="static"), name="static")
 
 app.add_middleware(
     CORSMiddleware,
@@ -40,6 +39,7 @@ PREDICTED_FOLDER = 'static'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(PREDICTED_FOLDER, exist_ok=True)
 
+app.mount("/static", StaticFiles(directory="static"), name="static")
 def generate_summary(disease: str):
     summary_template = PromptTemplate(
         input_variables=['disease'],
@@ -81,11 +81,6 @@ async def predict_disease(file: UploadFile = File(...)):
             name='predictions',  # Specify a name for the run
             exist_ok=True  # Overwrite existing files
         )
-        
-        # Get the predicted image filename
-        print(f"results ${results}")
-        # print(results.imgs)
-        # predicted_image_filename = results.imgs[0].split("/")[-
         
 
         # Construct the full URL for the predicted image

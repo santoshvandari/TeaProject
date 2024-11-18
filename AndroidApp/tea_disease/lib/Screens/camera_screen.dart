@@ -24,11 +24,10 @@ class _CameraScreenState extends State<CameraScreen> {
     final cameras = await availableCameras();
     // Ensure that cameras are available before using them
     if (cameras.isEmpty) {
-      // Handle no cameras available
-      print('No cameras available');
+      print('No cameras available'); // Handle no cameras available
       return;
     }
-    _controller = CameraController(cameras[0], ResolutionPreset.medium);
+    _controller = CameraController(cameras[0], ResolutionPreset.high);
 
     // Initialize the controller
     _initializeControllerFuture = _controller.initialize();
@@ -57,31 +56,64 @@ class _CameraScreenState extends State<CameraScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Capture Tea Leaf")),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 8.0),
-        child: Stack(children: [
+      body: Stack(
+        children: [
+          // Camera preview
           FutureBuilder(
             future: _initializeControllerFuture,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
-                return CameraPreview(
-                    _controller); // Show camera preview once initialized
+                return CameraPreview(_controller);
               } else {
                 return const Center(
-                    child:
-                        CircularProgressIndicator()); // Show loading spinner while initializing
+                  child: CircularProgressIndicator(
+                    color: Colors.white,
+                  ),
+                );
               }
             },
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: FloatingActionButton(
-              onPressed: _takePicture,
-              child: const Icon(Icons.camera),
+
+          // Translucent overlay with app bar
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 16.0),
+              decoration: BoxDecoration(
+                color: Colors.black.withOpacity(0.5),
+              ),
+              child: const Center(
+                child: Text(
+                  "Capture Tea Leaf",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
             ),
           ),
-        ]),
+
+          // Capture button at the bottom center
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 30.0),
+              child: FloatingActionButton(
+                onPressed: _takePicture,
+                backgroundColor: Colors.green,
+                child: const Icon(
+                  Icons.camera_alt,
+                  color: Colors.white,
+                  size: 28.0,
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

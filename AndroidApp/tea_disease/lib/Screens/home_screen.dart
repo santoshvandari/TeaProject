@@ -56,29 +56,76 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Tea Leaf Analysis")),
-      body: Center(
-        child: _isLoading
-            ? const CircularProgressIndicator()
-            : Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      // Navigate to the CameraScreen for capturing an image
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CameraScreen(
-                            onPhotoCaptured: _onPhotoCaptured,
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color(0xFF4CAF50), Color(0xFF81C784)],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: Center(
+          child: _isLoading
+              ? const CircularProgressIndicator(
+                  color: Colors.white,
+                )
+              : Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // App heading
+                    const Text(
+                      "Tea Leaf Analysis",
+                      style: TextStyle(
+                        fontSize: 32.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 16.0),
+
+                    // Illustration
+                    Image.asset(
+                      'assets/tea_leaf.png', // Ensure this asset exists in your project
+                      height: 200.0,
+                    ),
+                    const SizedBox(height: 24.0),
+
+                    // Capture button
+                    ElevatedButton(
+                      onPressed: () {
+                        // Navigate to the CameraScreen for capturing an image
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CameraScreen(
+                              onPhotoCaptured: _onPhotoCaptured,
+                            ),
                           ),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 40.0,
+                          vertical: 12.0,
                         ),
-                      );
-                    },
-                    child: const Text("Capture Tea Leaf"),
-                  ),
-                ],
-              ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                      ),
+                      child: const Text(
+                        "Capture Tea Leaf",
+                        style: TextStyle(
+                          color: Color(0xFF4CAF50),
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+        ),
       ),
     );
   }
