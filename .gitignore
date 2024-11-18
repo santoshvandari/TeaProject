@@ -7,4 +7,6 @@
 /demo/.env
 /demo/__pycache__
 /demo/static
-TrainResult/weights
+TrainResult/train/weights
+/API/best.pt
+/demo/best.pt
