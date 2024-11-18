@@ -7,7 +7,7 @@ class ApiService {
   // static const String apiUrl =
   // 'http://192.168.18.10:8000/predict/'; // Replace with your server's IP address
   static const String apiUrl =
-      'http://192.168.100.82:8000/predict/'; // Replace with your server's IP address
+      'http://192.168.18.10:8000/predict/'; // Replace with your server's IP address
 
   // Function to upload image and get the disease predictions
   static Future<Map<String, dynamic>> uploadImage(String imagePath) async {
