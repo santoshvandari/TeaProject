@@ -5,9 +5,9 @@ import 'package:http/http.dart' as http;
 class ApiService {
   // The FastAPI URL for disease prediction
   // static const String apiUrl =
-  // 'http://192.168.18.10:8000/predict/'; // Replace with your server's IP address
-  static const String apiUrl =
-      'http://192.168.18.10:8000/predict/'; // Replace with your server's IP address
+  // 'http://192.168.18.10:8000/predict/';
+  static const String apiUrl = 'http://192.168.18.10:8000/predict/';
+  // static const String apiUrl ='https://teaprojectapi.onrender.com/predict';
 
   // Function to upload image and get the disease predictions
   static Future<Map<String, dynamic>> uploadImage(String imagePath) async {

@@ -86,8 +86,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
                     // Illustration
                     Image.asset(
-                      'assets/tea_leaf.png', // Ensure this asset exists in your project
-                      height: 200.0,
+                      'assets/images/tea_leaf.png',
+                      width: 150.0,
+                      height: 150.0,
+                      fit: BoxFit.cover, // Adjust this to fit your design
                     ),
                     const SizedBox(height: 24.0),
 
