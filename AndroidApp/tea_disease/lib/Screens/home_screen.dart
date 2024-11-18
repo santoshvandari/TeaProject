@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tea_disease/Screens/camera_screen.dart';
 import 'package:tea_disease/Screens/result_screen.dart';
 import 'package:tea_disease/Services/api.dart';
+import 'camera_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -56,69 +56,29 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color(0xFF4CAF50), Color(0xFF81C784)],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-        ),
-        child: Center(
-          child: _isLoading
-              ? const CircularProgressIndicator(
-                  color: Colors.white,
-                )
-              : Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    // App heading
-                    const Text(
-                      "Tea Leaf Analysis",
-                      style: TextStyle(
-                        fontSize: 32.0,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 16.0),
-
-                    // Capture button
-                    ElevatedButton(
-                      onPressed: () {
-                        // Navigate to the CameraScreen for capturing an image
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => CameraScreen(
-                              onPhotoCaptured: _onPhotoCaptured,
-                            ),
+      appBar: AppBar(title: const Text("Tea Leaf Analysis")),
+      body: Center(
+        child: _isLoading
+            ? const CircularProgressIndicator()
+            : Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      // Navigate to the CameraScreen for capturing an image
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CameraScreen(
+                            onPhotoCaptured: _onPhotoCaptured,
                           ),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 40.0,
-                          vertical: 12.0,
                         ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                      ),
-                      child: const Text(
-                        "Capture Tea Leaf",
-                        style: TextStyle(
-                          color: Color(0xFF4CAF50),
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-        ),
+                      );
+                    },
+                    child: const Text("Capture Tea Leaf"),
+                  ),
+                ],
+              ),
       ),
     );
   }
