@@ -76,7 +76,7 @@ async def predict_disease(file: UploadFile = File(...)):
         results = model.predict(
             source=filepath,
             save=True,
-            conf=0.4,
+            conf=0.5,
             project=PREDICTED_FOLDER,  # Specify the project directory
             name='predictions',  # Specify a name for the run
             exist_ok=True  # Overwrite existing files
@@ -84,6 +84,7 @@ async def predict_disease(file: UploadFile = File(...)):
         
 
         # Construct the full URL for the predicted image
+        # base_url = "http://172.25.98.96:8000"  # Update this with your actual server URL
         base_url = "http://192.168.18.10:8000"  # Update this with your actual server URL
         predicted_image_url = urljoin(base_url, f"/static/predictions/{file.filename}")
 
