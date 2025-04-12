@@ -86,7 +86,7 @@ async def predict_disease(file: UploadFile = File(...)):
         # Construct the full URL for the predicted image
         # base_url = "http://172.25.98.96:8000"  # Update this with your actual server URL
         base_url = "http://192.168.18.10:8000"  # Update this with your actual server URL
-        predicted_image_url = urljoin(base_url, f"/static/predictions/{file.filename}")
+        predicted_image_url = f"/static/predictions/{file.filename}"
 
         # Get predictions and disease summaries
         predictions = results[0].boxes.data.tolist()
@@ -109,7 +109,7 @@ async def predict_disease(file: UploadFile = File(...)):
          # If no predictions
         if len(formatted_predictions) == 0:
             return JSONResponse(status_code=200, content={ "message": "No disease detected"})
-
+        print(formatted_predictions)
         return JSONResponse(status_code=200, content=formatted_predictions)
 
 

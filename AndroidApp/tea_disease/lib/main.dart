@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:tea_disease/Screens/home_screen.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+Future<void> main() async {
+  // Load the .env file
+  await dotenv.load();
+
   runApp(const DiseaseApp());
 }
 

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html_2/flutter_html_2.dart';
+import '../Services/api.dart'; // Import ApiService to access the API URL
 
 class ResultScreen extends StatelessWidget {
-  final List<dynamic> result; // Accept List of predictions directly
+  final List<dynamic> result;
 
   const ResultScreen({super.key, required this.result});
 
@@ -14,6 +15,18 @@ class ResultScreen extends StatelessWidget {
     debugPrint("Disease Info: $diseaseInfo");
 
     final String? imagePath = diseaseInfo?['predicted_image'];
+
+    // Function to get the full image URL
+    String getFullImageUrl(String path) {
+      if (path.startsWith('http')) {
+        return path;
+      } else if (path.startsWith('/static/')) {
+        // Extract the base URL from ApiService (without 'predict/')
+        final baseUrl = ApiService.apiUrl.split('/predict/')[0];
+        return '$baseUrl$path';
+      }
+      return path;
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -53,14 +66,16 @@ class ResultScreen extends StatelessWidget {
                           if (imagePath != null)
                             ClipRRect(
                               borderRadius: BorderRadius.circular(16.0),
-                              child: imagePath.startsWith('http')
-                                  ? Image.network(
-                                      imagePath,
-                                      width: double.infinity,
-                                      height: 400.0,
-                                      fit: BoxFit.contain,
-                                    )
-                                  : const Text("No Image Found"),
+                              child: Image.network(
+                                getFullImageUrl(imagePath),
+                                width: double.infinity,
+                                height: 400.0,
+                                fit: BoxFit.contain,
+                                errorBuilder: (context, error, stackTrace) {
+                                  debugPrint("Image error: $error");
+                                  return const Text("Failed to load image");
+                                },
+                              ),
                             ),
                           const SizedBox(height: 16.0),
 
