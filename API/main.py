@@ -85,7 +85,7 @@ async def predict_disease(file: UploadFile = File(...)):
 
         # Construct the full URL for the predicted image
         # base_url = "http://172.25.98.96:8000"  # Update this with your actual server URL
-        base_url = "http://192.168.18.10:8000"  # Update this with your actual server URL
+        base_url = "http://127.0.0.1:8001"  # Update this with your actual server URL
         predicted_image_url = f"/static/predictions/{file.filename}"
 
         # Get predictions and disease summaries
