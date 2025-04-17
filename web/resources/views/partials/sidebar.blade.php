@@ -1,4 +1,4 @@
-<aside class="main-sidebar elevation-4" style="background: white">
+<aside class="main-sidebar elevation-4" style="background: white;">
     <!-- Brand Logo -->
     <a href="/" class="brand-link">
         <img src="/dist/img/Logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
@@ -12,26 +12,26 @@
             {{-- Optional user panel content --}}
         </div>
 
-        <!-- SidebarSearch Form -->
-        {{-- <div class="form-inline">
-            <div class="input-group" data-widget="sidebar-search">
-                <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-                <div class="input-group-append">
-                    <button class="btn btn-sidebar">
-                        <i class="fas fa-search fa-fw"></i>
-                    </button>
-                </div>
-            </div>
-        </div> --}}
-
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <!-- Dashboard Section -->
                 <li class="nav-item menu-open">
                     <a href="/" class="nav-link">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <!-- Dashboard Icon -->
+                        <i class="nav-icon fas fa-home"></i> <!-- A more professional home icon -->
                         <p>
                             Dashboard
+                        </p>
+                    </a>
+                </li>
+                <!-- Scan Section -->
+                <li class="nav-item menu-open">
+                    <a href="/scan" class="nav-link">
+                        <!-- Modern Scan Icon -->
+                        <i class="nav-icon fas fa-qrcode"></i> <!-- QR Code icon for modern scanning -->
+                        <p>
+                           Scan
                         </p>
                     </a>
                 </li>
