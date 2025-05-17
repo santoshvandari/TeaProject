@@ -42,18 +42,45 @@ os.makedirs(PREDICTED_FOLDER, exist_ok=True)
 app.mount("/static", StaticFiles(directory="static"), name="static")
 def generate_summary(disease: str):
     summary_template = PromptTemplate(
-        input_variables=['disease'],
-        template='''Generate a summary of cures and precautions for the plant disease: {disease}. 
-        Include treatment methods and preventive measures. 
-        IMPORTANT: Respond ONLY in English language. Do not use any Other Language.
+    input_variables=['disease'],
+    template='''
+        Generate a detailed summary of cures and precautions for the plant disease: {disease}.
+        Respond ONLY in the English language. Do not use any other language.
 
-        Your response should follow this structure:
-        1. Disease Name
-        2. Cause of the Disease
-        3. Symptoms of the Disease
-        4. Treatment Methods
-        5. Preventive Measures
-        6. Additional Recommendations
+        Your response should follow this structure and provide specific, actionable, and well-researched insights:
+
+        1. **Disease Name**
+        - Full scientific and common name (if available)
+
+        2. **Cause of the Disease**
+        - Specify whether the cause is fungal, bacterial, viral, or due to environmental factors
+        - Include specific pathogens or conditions (e.g., *Phytophthora infestans*, poor drainage)
+
+        3. **Environmental Conditions Favoring the Disease**
+        - Describe temperature, humidity, soil conditions, or season that promote the disease
+
+        4. **Symptoms of the Disease**
+        - Include early signs and progressive symptoms
+        - Mention how symptoms appear on leaves, stems, roots, or fruits
+
+        5. **Plants Commonly Affected**
+        - List some examples of plant species or crops that are often affected
+
+        6. **Treatment Methods**
+        - Describe both **organic** (e.g., neem oil, compost tea) and **chemical** (e.g., fungicides, antibiotics) treatment options
+        - Mention dosage, application frequency, and safety precautions
+
+        7. **Preventive Measures**
+        - Include crop rotation, soil treatment, spacing, irrigation practices, resistant plant varieties, etc.
+
+        8. **Impact on Yield or Plant Health**
+        - Explain how the disease affects productivity or quality of the crops if left untreated
+
+        9. **Additional Recommendations**
+        - Suggest monitoring strategies, agricultural best practices, or seasonal actions
+        - Reference any tools, sensors, or technologies (e.g., moisture meters, AI-based disease detection)
+
+        Be specific, concise, and factual. Avoid unnecessary filler content. Respond only in English.
         '''
     )
     llm = GoogleGenerativeAI(temperature=0.7, model="gemini-1.5-flash", api_key=apikey)

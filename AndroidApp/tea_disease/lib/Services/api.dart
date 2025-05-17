@@ -6,7 +6,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 class ApiService {
   // Get API URL from .env file with fallback
   static String get apiUrl =>
-      dotenv.env['API_URL'] ?? 'http://192.168.1.177:8000/predict/';
+      dotenv.env['API_URL'] ?? 'http://192.168.18.10:8000/predict/';
 
   // Function to upload image and get the disease predictions
   static Future<Map<String, dynamic>> uploadImage(String imagePath) async {
